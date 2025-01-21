@@ -10,6 +10,16 @@ function exibirMensagemDeErro(mensagem) {
   resultado.textContent = mensagem;
 }
 
+function exibirLista() {
+  const lista = document.querySelector("#listaAmigos");
+
+  listaAmigos.forEach((amigo) => {
+    const item = document.createElement("li");
+    item.textContent = amigo;
+    lista.appendChild(item);
+  });
+}
+
 function limparLista() {
   document.querySelector("#listaAmigos").textContent = "";
 }
@@ -24,16 +34,26 @@ function adicionarAmigo() {
 
   limparResultado();
 
-  if (nome === "") {
-    return exibirMensagemDeErro("O campo não pode estar vazio!");
-  }
-
-  if (!validarNome(nome)) {
-    return exibirMensagemDeErro("Insira apenas letras e sem espaços extras.");
-  }
+  if (nome === "") return exibirMensagemDeErro("O campo não pode estar vazio!");
+  if (!validarNome(nome)) return exibirMensagemDeErro("Insira apenas letras e sem espaços extras.");
 
   listaAmigos.push(nome);
   limparLista();
   exibirLista();
   campoNome.value = "";
+}
+
+function sortearAmigo() {
+  const resultado = document.querySelector("#resultado");
+
+  limparResultado();
+
+  if (listaAmigos.length === 0) return exibirMensagemDeErro("Adicione pelo menos um amigo para sortear.");
+
+  const amigoSorteado = listaAmigos[Math.floor(Math.random() * listaAmigos.length)];
+
+  resultado.textContent = `Amigo sorteado: ${amigoSorteado}`;
+
+  limparLista();
+  listaAmigos.length = 0;
 }

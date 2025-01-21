@@ -10,6 +10,14 @@ function exibirMensagemDeErro(mensagem) {
   resultado.textContent = mensagem;
 }
 
+function limparLista() {
+  document.querySelector("#listaAmigos").textContent = "";
+}
+
+function limparResultado() {
+  document.querySelector("#resultado").textContent = "";
+}
+
 function adicionarAmigo() {
   const campoNome = document.querySelector("#amigo");
   const nome = campoNome.value.trim();

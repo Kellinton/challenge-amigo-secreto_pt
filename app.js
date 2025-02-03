@@ -20,25 +20,21 @@ function exibirLista() {
   });
 }
 
-function limparLista() {
-  document.querySelector("#listaAmigos").textContent = "";
-}
-
-function limparResultado() {
-  document.querySelector("#resultado").textContent = "";
+function limparConteudo(id) {
+  document.querySelector(id).textContent = "";
 }
 
 function adicionarAmigo() {
   const campoNome = document.querySelector("#amigo");
   const nome = campoNome.value.trim();
 
-  limparResultado();
+  limparConteudo("#resultado");
 
   if (nome === "") return exibirMensagemDeErro("O campo não pode estar vazio!");
   if (!validarNome(nome)) return exibirMensagemDeErro("Insira apenas letras e sem espaços extras.");
 
   listaAmigos.push(nome);
-  limparLista();
+  limparConteudo("#listaAmigos");
   exibirLista();
   campoNome.value = "";
 }
@@ -46,7 +42,7 @@ function adicionarAmigo() {
 function sortearAmigo() {
   const resultado = document.querySelector("#resultado");
 
-  limparResultado();
+  limparConteudo("#resultado");
 
   if (listaAmigos.length === 0) return exibirMensagemDeErro("Adicione pelo menos um amigo para sortear.");
 
@@ -54,6 +50,6 @@ function sortearAmigo() {
 
   resultado.textContent = `Amigo sorteado: ${amigoSorteado}`;
 
-  limparLista();
+  limparConteudo("#listaAmigos");
   listaAmigos.length = 0;
 }
